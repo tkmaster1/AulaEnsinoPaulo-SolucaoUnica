@@ -2,6 +2,10 @@
 
 $(document).ready(function () {
 
+    $('#cb-jogador').select2();
+    $('#cb-categoria').select2();
+    $('#cb-ano').select2();
+
     $('#dtArtilharia').DataTable({
         searching: true,
         "language": {
@@ -19,3 +23,13 @@ $(document).ready(function () {
     });
 
 });
+
+$("#btnLimparCampos").click(function () {
+    $('#cb-jogador').val("").trigger('change');
+    $('#cb-categoria').val("").trigger('change');
+    $('#cb-ano').val("").trigger('change');
+});
+
+function FiltrarConteudo() {
+    alert('Entrou aqui');
+}

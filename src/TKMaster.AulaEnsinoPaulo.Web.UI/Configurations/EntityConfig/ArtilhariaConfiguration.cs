@@ -49,6 +49,11 @@ namespace TKMaster.SolucaoUnica.Web.UI.Configurations.EntityConfig
                 .Ignore(c => c.Nome);
 
             builder
+               .HasOne(c => c.Categoria)
+               .WithMany(a => a.Artilharias)
+               .HasForeignKey(a => a.CodigoCategoria);
+
+            builder
                 .HasOne(c => c.Jogador)
                 .WithMany(j => j.Artilharias)
                 .HasForeignKey(j => j.CodigoJogador);

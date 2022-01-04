@@ -5,7 +5,7 @@ using TKMaster.SolucaoUnica.Web.UI.ViewModels;
 namespace TKMaster.SolucaoUnica.Web.UI.AutoMapper
 {
     /// <summary>
-    /// 4.1 º passo, criação das classes de mapeamento: DomainToViewModelMappingProfile
+    /// 4.1ª Etapa, criação das classes de mapeamento: DomainToViewModelMappingProfile
     /// </summary>
     public class DomainToViewModelMappingProfile : Profile
     {
@@ -13,6 +13,8 @@ namespace TKMaster.SolucaoUnica.Web.UI.AutoMapper
         {
             CreateMap<Equipe, EquipeViewModel>()
                 .ForMember(dest => dest.CodigoCidade, m => m.MapFrom(a => a.Cidade.Codigo));
+
+            CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
 
             CreateMap<Cidade, CidadeViewModel>().ReverseMap();
 

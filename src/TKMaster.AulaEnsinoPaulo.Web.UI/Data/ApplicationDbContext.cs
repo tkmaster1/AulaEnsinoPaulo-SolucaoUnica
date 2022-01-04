@@ -5,7 +5,7 @@ using TKMaster.SolucaoUnica.Web.UI.Models;
 namespace TKMaster.SolucaoUnica.Web.UI.Data
 {
     /// <summary>
-    /// 3º passo, criação da classe de contexto: ApplicationDbContext (acesso ao abnco de dados)
+    /// 3º Etapa, criação da classe de contexto: ApplicationDbContext (acesso ao abnco de dados)
     /// </summary>
     public class ApplicationDbContext : DbContext
     {
@@ -21,6 +21,8 @@ namespace TKMaster.SolucaoUnica.Web.UI.Data
         #region DbSet
 
         public DbSet<Artilharia> Artilharias { get; set; }
+
+        public DbSet<Categoria> Categorias { get; set; }
 
         public DbSet<Cidade> Cidades { get; set; }
 
