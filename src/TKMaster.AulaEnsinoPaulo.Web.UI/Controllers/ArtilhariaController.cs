@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TKMaster.SolucaoUnica.Web.UI.Data;
 using TKMaster.SolucaoUnica.Web.UI.Models;
+using TKMaster.SolucaoUnica.Web.UI.Services;
 using TKMaster.SolucaoUnica.Web.UI.ViewModels;
+using TKMaster.SolucaoUnica.Web.UI.ViewModels.Request;
 
 namespace TKMaster.SolucaoUnica.Web.UI.Controllers
 {
@@ -46,26 +47,18 @@ namespace TKMaster.SolucaoUnica.Web.UI.Controllers
             await ListarCategorias();
             ListarAnos();
 
-            var retorno = await ListarTodos();
-            return View(retorno);
+            return View();
         }
 
         #endregion
 
         #region Methods Públicos
 
-        public async Task<List<ArtilhariaViewModel>> ListarTodos()
-        {
-            var response = await _context.Artilharias
-                                         .Include(c => c.Jogador)
-                                         .Include(c => c.Categoria).ToListAsync();
-
-            return _mapper.Map<List<ArtilhariaViewModel>>(response ?? new List<Artilharia>());
-        }
-
         public async Task<IActionResult> ListarJogadores()
         {
-            var response = await _context.Jogadores.ToListAsync();
+            var jogadorAppService = new JogadorAppService(_context);
+
+            var response = await jogadorAppService.ListarTodos();
             var retorno = _mapper.Map<List<JogadorViewModel>>(response?.OrderBy(x => x.Nome).ToList() ?? new List<Jogador>());
             ViewBag.Jogador = new SelectList(retorno.Select(a => new { a.Codigo, a.Nome }).Distinct(), "Codigo", "Nome");
 
@@ -78,7 +71,8 @@ namespace TKMaster.SolucaoUnica.Web.UI.Controllers
         /// <returns></returns>
         public async Task<IActionResult> ListarCategorias()
         {
-            var response = await _context.Categorias.ToListAsync();
+            var categoriaAppService = new CategoriaAppService(_context);
+            var response = await categoriaAppService.ListarTodos();
             var retorno = _mapper.Map<List<CategoriaViewModel>>(response?.OrderBy(x => x.Nome).ToList() ?? new List<Categoria>());
             ViewBag.Categoria = new SelectList(retorno.Select(a => new { a.Codigo, a.Nome }).Distinct(), "Codigo", "Nome");
 
@@ -88,7 +82,7 @@ namespace TKMaster.SolucaoUnica.Web.UI.Controllers
         public IActionResult ListarAnos()
         {
             var listYears = new Dictionary<int, string>();
-            DateTime startYear = DateTime.Now.AddYears(-20);
+            DateTime startYear = DateTime.Now.AddYears(-22);
             while (startYear.Year <= DateTime.Now.AddYears(10).Year)
             {
                 listYears.Add(startYear.Year, startYear.Year.ToString());
@@ -99,11 +93,17 @@ namespace TKMaster.SolucaoUnica.Web.UI.Controllers
             return Ok(true);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> PesquisarArtilharia([FromBody] RequestFiltroArtilharia filtro)
-        //{
+        [HttpPost]
+        public async Task<IActionResult> PesquisarArtilharia([FromBody] RequestFiltroArtilharia filtro)
+        {
+            var artilhariaAppService = new ArtilhariaAppService(_context);
 
-        //}
+            var retorno = await artilhariaAppService.PesquisarComFiltro(filtro);
+
+            var response = _mapper.Map<List<ArtilhariaViewModel>>(retorno ?? new List<Artilharia>());
+
+            return PartialView("_Lista", response);
+        }
 
         #endregion
     }

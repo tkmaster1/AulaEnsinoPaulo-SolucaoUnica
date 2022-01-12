@@ -1,35 +1,41 @@
 ﻿/* Arquivo .js que contém todas funções necessárias para a página de Artilharia */
 
-$(document).ready(function () {
-
-    $('#cb-jogador').select2();
-    $('#cb-categoria').select2();
-    $('#cb-ano').select2();
-
-    $('#dtArtilharia').DataTable({
-        searching: true,
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json",
-            "infoEmpty": "No entries to show",
-            "sInfo": "Mostrando de _START_ ate _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "_MENU_ resultados por página",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-        }
-    });
-
+$(function () {
+    FiltrarConteudo();
 });
 
 $("#btnLimparCampos").click(function () {
     $('#cb-jogador').val("").trigger('change');
     $('#cb-categoria').val("").trigger('change');
     $('#cb-ano').val("").trigger('change');
+
+    $('#dtArtilharia').dataTable().fnClearTable();
 });
 
 function FiltrarConteudo() {
-    alert('Entrou aqui');
+    // debugger;
+    var codigoJogador = $('#cb-jogador option:selected').val() !== '' ? $('#cb-jogador option:selected').val() : 0;
+    var codigoCategoria = $('#cb-categoria option:selected').val() !== '' ? $('#cb-categoria option:selected').val() : 0;
+    var codigoAno = $('#cb-ano option:selected').val() !== '' ? $('#cb-ano option:selected').val() : 0;
+
+    var filters = {
+        'CodigoJogador': parseInt(codigoJogador),
+        'CodigoCategoria': parseInt(codigoCategoria),
+        'Ano': parseInt(codigoAno)
+    };
+
+    $.ajax({
+        url: "/Artilharia/PesquisarArtilharia",
+        type: 'POST',
+        cache: false,
+        async: true,
+        dataType: "html",
+        data: JSON.stringify(filters),
+        contentType: 'application/json; charset=utf8',
+    }).done(function (result) {
+        $('#divListarArtilharia').html(result);
+    }).fail(function (xhr) {
+        console.log('error : ' + xhr.status + ' - '
+            + xhr.statusText + ' - ' + xhr.responseText);
+    });
 }
