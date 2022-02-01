@@ -30,6 +30,8 @@ namespace TKMaster.SolucaoUnica.Web.UI.Data
 
         public DbSet<Jogador> Jogadores { get; set; }
 
+        public DbSet<Jogo1> Jogos { get; set; }
+
         #endregion
 
         #region ModelBuilder e SaveChanges

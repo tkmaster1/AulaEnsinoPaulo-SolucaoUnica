@@ -8,5 +8,7 @@ namespace TKMaster.SolucaoUnica.Web.UI.Models
     public class Categoria : Entity
     {
         public virtual List<Artilharia> Artilharias { get; set; }
+
+        public virtual List<Jogo1> Jogos { get; set; }
     }
 }

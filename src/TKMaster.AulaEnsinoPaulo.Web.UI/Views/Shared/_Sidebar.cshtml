@@ -24,7 +24,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-compact" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
+                with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-file"></i>
@@ -41,30 +41,30 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Cidade")" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Cidades</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Categoria")" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Categorias</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Home")" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Classificação</p>
-                            </a>
-                        </li>
-                    </ul>
+                    @*<ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Cidade")" class="nav-link">
+                                    <i class="fas fa-circle nav-icon"></i>
+                                    <p>Cidades</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Categoria")" class="nav-link">
+                                    <i class="fas fa-circle nav-icon"></i>
+                                    <p>Categorias</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Home")" class="nav-link">
+                                    <i class="fas fa-circle nav-icon"></i>
+                                    <p>Classificação</p>
+                                </a>
+                            </li>
+                        </ul>*@
                 </li>
 
                 <li class="nav-item">
@@ -83,19 +83,37 @@
                             </a>
                         </li>
                     </ul>
+                    @*<ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Campanha")" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Campanha</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "HistoricoGeral")" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Historico Geral</p>
+                                </a>
+                            </li>
+                        </ul>*@
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Gráficos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Campanha")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Campanha</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "HistoricoGeral")" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Historico Geral</p>
+                            <a href="@Url.Action("Index", "Jogo")" class="nav-link">
+                                <i class="far fa-chart-bar nav-icon"></i>
+                                <p>Jogo 1</p>
                             </a>
                         </li>
                     </ul>
